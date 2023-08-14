@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <main class="container">
+
+        <form class="container w-50 text-center"> 
+            <h3 >Sign up here</h3>
+            <label for="for">Username</label><br>
+            <input id="for" type="text">
+            <label for="man">Email</label><Br>
+            <input id="man" type="email">
+            <label  for="fir">Password</label><br><span id="dup" class="eye-icon">&#128065;</span>
+            <input id="fir" type="password">
+             <label  for="fur">Confirm Password</label><br><span id="dug" class="eye-icon">👁</span>
+            <input id="fur" type="password">
+            <button onclick="subway(event)" type="submit" >Sign Up</button>
+        </form>
+    </main>
+</body>
+<script>
+ let username = document.getElementById("for")
+ let Email = document.getElementById("man")
+ let password = document.getElementById("fir")
+ let cpassword = document.getElementById("fur")
+ let allUser  = JSON.parse(localStorage.getItem("user"))
+ let showp = document.getElementById("dup")
+ let show = document.getElementById("dug")
+ showp.addEventListener("click", function(){
+        if (password.type === "password" ) {
+            password.type = "text";
+            
+        }
+        else{
+            password.type = "password"
+
+        }
+    })    
+    show.addEventListener("click", function(){
+        if (cpassword.type === "password" ) {
+            cpassword.type = "text";
+        }
+        else{
+            
+            cpassword.type = "password";
+
+        }
+    })
+
+  function subway(event){
+    event.preventDefault()
+    let data = {
+      username : username.value,
+      Email: Email.value,
+      password : password.value,
+    }
+    // console.log(data)
+    if (username.value == " " || Email.value == "" || password.value == "") {
+        alert("Input field cannot be empty")
+    }
+       else if (password.value !== cpassword.value){
+            alert("Password does not match")
+        }
+        else {
+        allUser.push(data)
+        alert("Signup successful")
+     localStorage.setItem("user", JSON.stringify(allUser))
+    //  console.log(bro);
+        window.location.href="login.html"
+    }
+
+  }
+ 
+</script>
+<script src="bootstrap-5.3.0-alpha3-dist/js/bootstrap.min.js"></script>    
+</html>

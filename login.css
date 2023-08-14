@@ -1,0 +1,75 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+   background-image: url(loginbg.avif);
+   background-position: center;
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   /* position: relative; */
+   background-repeat: no-repeat;
+}
+form{
+
+    margin-top: 150px;
+    border:1px solid white;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    
+    width: 330px;
+    background: rgb(7, 7, 7);
+   text-align: center;
+
+}
+h3{
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: medium;
+}
+#man{
+    width: 100%;
+}
+.net{
+    box-shadow: 2px 3px 4px 2px ;
+position: relative;
+background: white;
+border-radius: 15px;
+/* color: white; */
+
+}
+#dup{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    cursor: pointer;
+}
+#fir{
+ background: none;
+ border: none;
+ outline: none;
+ width: 100%;
+}
+label{
+color: aquamarine;
+}
+button{
+    background: white;
+    color: black;
+    margin: 15px;
+    font-size: 28px;
+
+
+}
+.ken{
+    /* padding: 10px 24px; */
+    background-color: rgb(33, 33, 151);
+    color: gold;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+
+}
