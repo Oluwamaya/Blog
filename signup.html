@@ -11,7 +11,7 @@
 <body>
     <main class="container">
 
-        <form class="container w-50 text-center"> 
+        <form class="container red text-center"> 
             <h3 >Sign up here</h3>
             <label for="for">Username</label><br>
             <input id="for" type="text">
@@ -30,9 +30,11 @@
  let Email = document.getElementById("man")
  let password = document.getElementById("fir")
  let cpassword = document.getElementById("fur")
- let allUser  = JSON.parse(localStorage.getItem("user"))
+ let allUser  = JSON.parse(localStorage.getItem("user")) || [];
+ console.log(allUser)
  let showp = document.getElementById("dup")
  let show = document.getElementById("dug")
+
  showp.addEventListener("click", function(){
         if (password.type === "password" ) {
             password.type = "text";

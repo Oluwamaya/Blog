@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(169, 226, 169);
+    }
+    .container {
+      text-align: center;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      /* grid-gap:5px; */
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      border: 1px solid blue;
+      cursor: pointer;
+      font: 54px;
+      text-align: center;
+      transition: background-color 0.36;
+    }
+    .cell:hover {
+      background-color: gold;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="board">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+    </div>
+    <button id="restart" onclick="ken()">Restart</button>
+  </body>
+
+  <script>
+    let = document.getElementById("bro");
+    let show = document.getElementById("dup");
+
+    let board = Array(9).fill(null);
+    let currentplayer = "X";
+    let cells = document.querySelectorAll(".cell");
+
+    function handle(cellIndex) {
+      if (board[cellIndex] === null) {
+        board[cellIndex] = currentplayer;
+
+        cells[cellIndex].innerText = currentplayer;
+        currentplayer = currentplayer === "X" ? "O" : "X";
+        // if (currentplayer === 'x') {
+        //     currentplayer ='0'
+        // }
+        // else {
+        // currentplayer = 'x'
+        // }
+        checkWinner();
+      }
+    }
+    function checkWinner() {
+      const wincombos = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      for (const combo of wincombos) {
+        const [a, b, c] = combo;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          alert("winner ");
+          return;
+          setInterval(() => {
+            
+          }, interval);
+        }
+
+        //  } else {
+        //     alert("player 2 wins")
+        //  }
+      }
+      if (!board.includes(null)) {
+        alert("Its A Draw");
+        cells.forEach(cell => {
+            cell.innerHTML  = '';
+        })
+        currentplayer= 'x'
+      }
+    }
+    cells.forEach((cell, index) => {
+      cell.addEventListener("click", () => {
+        handle(index);
+      });
+    });
+
+    function ken() {
+        board.fill(null);
+        currentplayer = "X"
+        cells.forEach(cell => {
+            cell.innerHTML = ''
+        })
+      // if(maya > 1 && maya <= 39){
+      //     alert("F")
+      // }
+      // else if(maya >= 40 && maya <= 44){
+      // alert("E")
+      // }
+      // else if( maya >= 45 && maya <= 50){
+      // alert("D")
+      // } else if(maya >= 51 && maya <= 59){
+      // alert("c")
+      // }
+      // else if(maya >= 60 && maya <= 69){
+      // alert("B")
+      // }
+      // else if(maya >= 70  && maya <= 100){
+      // alert("A")
+      // }
+      // else if(maya > 100){
+      // alert("A*")
+      // }
+      // else if(maya < 1){
+      // alert("F*")
+      // }
+      // else{
+      //     alert("input your details")
+      // }
+    }
+  </script>
+</html>

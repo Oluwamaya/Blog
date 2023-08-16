@@ -1,69 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
-</head>
-<style>
-    .new{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 400px;
-        margin: auto;
-        border: 1px solid blueviolet;
+    <link
+      rel="stylesheet"
+      href="bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css"
+    />
+  </head>
+  <style>
+    .new {
+      margin: auto;
+      margin-top: 100px;
+      text-align: center;
 
+      /* border: 1px solid blueviolet; */
     }
-    .post{
-        position: relative;
-    }
-    
-    .ken{
-        display: none;
-        position: absolute;
-        width: 100%;
-        bottom: -70px;
-
-
-    }
-    .post:focus-within .ken{
-        display: block;
+    .post {
+      position: relative;
     }
 
+    .ken {
+      display: none;
+      position: absolute;
+      width: 100%;
+      bottom: -70px;
+    }
+    .post:focus-within .ken {
+      display: block;
+    }
+   
+  </style>
+  <body>
+    <div
+      class="container col-sm-7 bg-success border border-2 border-danger text-danger"
+    >
+      <h6 class="display-4 text-light">welcome <span class="display-5 text-warning" id="userid"></span></h6>
+      <div class="new container">
+        <div class="d-flex justify-content-center mx-3">
+          
+          
+            <button class="btn btn-primary ms-3" onclick="postt()">Post Blog</button>
+            <button class="btn btn-primary ms-3" id="result" onclick="view()">
+              View Blog
+            </button>
+            <button class="btn btn-primary ms-3" onclick="likeview()">
+              Likes Blog
+            </button>
+              <p class="learn"></p>
+            
+      </div>
+      <p id="gen"></p>
+      <p id="viewblog"></p>
 
-</style>
-<body>
-    <div class="new container">
-        <div class="post">
-            <button >Post blog</button>
-            <div class="ken">
-                
-                <input  id="ken" type="text" placeholder="title">
-                <button  onclick="post()">Submit</button>
-            </div>
-           
-        </div>
-       
-        
-        <button id="result" onclick="view()">View all Blog</button>
-        <p class="mko"></p>
-        <button onclick="like()">view likes blog</button>
+      <button class="btn btn-secondary">LOG OUT</button>
     </div>
-</body>
-<script>
-    let result = document.getElementById("result")
-    let next = document.getElementById("mko")
-
-
-   function post(){
-     let input = document.getElementById("ken")
-     result.innerHTML = result
-     result.innerHTML 
+  </body>
+  <script>
+    let ccurent_user = JSON.parse(localStorage.getItem("ccurent_user"));
+    let welcome = document.getElementById("userid");
+    let submittt = document.getElementById("man")
+    let letview = document.getElementById("result")
+    welcome.innerHTML = ccurent_user.username.toUpperCase();
+    function postt() {
+      let post = document.getElementById("gen");
+      post.innerHTML = `<div> <input  id="ken" class="form-control" type="text" placeholder="title">
+        <textarea id="text" placeholder="Description" class="form-control my-3" ></textarea>
+       <div class="d-flex"> <button id="man" class="btn btn-info m-3" onclick="sub(event)">Submit</button>
+          <button class="btn btn-info m-3" onclick="bell()">DELETE</button></div></div>`;
     }
-    // }
-    // function view(){
-    // }
-</script>
+    let arr1 = JSON.parse(localStorage.getItem('info')) || [];
+    let like = document.getElementById("likeee");
+  
+let maya = new Date()
+      console.log(maya);
+      
+    function sub(ev) {
+      ev.preventDefault();
+      let title = document.getElementById("ken");
+      let text = document.getElementById("text");
+
+      let data = {
+        id: Math.floor(Math.random()*999),
+        user: ccurent_user.username,
+        Title: title.value,
+        Textarea: text.value,
+        isLike : false,
+        time: new Date().toLocaleDateString()
+      };
+      
+      arr1.push(data);
+
+      view()
+       localStorage.setItem("info", JSON.stringify(arr1))
+    }
+
+    function view() {
+      viewblog.innerHTML = " ";
+
+        for (let index = 0; index < arr1.length; index++) {
+          const element = arr1[index];
+          
+          viewblog.innerHTML += `<div  class="container bg-info mt-3 text-light "> <div class="display-6 ">Author: ${element.user}</div>
+              <div class="display-6">Title: ${element.Title}</div>
+              <div class="display-7">Text: ${element.Textarea}</div>
+              <div>Date: ${element.time}</div>
+              <button id="like${element.id}" class="btn ${element.isLike? "btn-dark": "btn-light"} m-3" onclick="lik('${element.id}')">
+                ${element.isLike? "Unlike" : "Like"}
+                </button>
+                
+              <button class="btn btn-dark m-3" onclick="dell(${index})">Delete</button></div>`;
+        }
+        
+    }
+    function dell(index) {
+      arr1.splice(index, 1);
+      localStorage.setItem("info", JSON.stringify(arr1))
+      view()
+    }
+    // let isLike = false
+    function lik(i) {
+      let post = arr1.find((f)=> f.id == i)
+        let like = document.getElementById(`like${i}`);
+        post.isLike = !post.isLike
+      localStorage.setItem("info", JSON.stringify(arr1))
+      view()
+
+      
+    }
+    function likeview() {
+      let viewlike = document.getElementById("learn")
+      
+      let allLiked = arr1.filter((fil)=> fil.isLike == true)
+   
+      for (let index = 0; index < allLiked.length; index++) {
+        
+        viewlike.innerHTML += `<div>${allLiked[i]}}</div> `
+        
+      }
+
+
+
+        
+
+for (let index = 0; index < arr1.length; index++) {
+  const element = arr1[index];
+    if (arr1) {
+      viewlike.innerHTML += `<div class="bg-info  text-light"> <div class="display-6 ">author:${element.user}</div>
+      <div class="display-6">title: ${element.Title}</div>
+      <div class="display-6">textarea: ${element.Textarea}</div>
+      <button class="btn btn-dark m-3" onclick="dell(${index})">Delete</button></div>`;
+    }
+ 
+}
+    }
+  </script>
 </html>
+

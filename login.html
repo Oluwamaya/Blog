@@ -45,9 +45,10 @@
 
     function soft(ev) {
       ev.preventDefault();
-      let found = suser.find(
-        (guy) => guy.email == email.value || guy.password == password.value
-      );
+       let found = suser.find((guy) => guy.email == Email.value && guy.password == password.value);
+      // let found = suser.find((guy) => {
+      //   guy.email == email.value || guy.password == password.value
+      // });
       console.log(found);
       if (email.value == "" || password.value == "") {
         alert("Input field cannot be empty");

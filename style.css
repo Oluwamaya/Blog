@@ -23,12 +23,12 @@ h3{
     margin: auto;
     padding-right: 25px;
 }
+.red{
+    max-width: 500px;
+}
 form{
-    
-     background: transparent;
-     border-radius:20px ;
-    /* margin: auto; */
-    
+   background: transparent;
+     border-radius:20px ; 
     margin-top: 100px;
     margin-bottom: 200px;
     height: 310px;
