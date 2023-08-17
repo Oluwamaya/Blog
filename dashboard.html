@@ -54,7 +54,7 @@
         <p id="gen"></p>
         <p id="viewblog"></p>
 
-        <button class="btn btn-secondary">LOG OUT</button>
+        <button onclick="logout()" class="btn btn-secondary">LOG OUT</button>
       </div>
     </div>
   </body>
@@ -178,9 +178,15 @@
         const element = allLiked[index];
         viewlike.innerHTML += `<div class="bg-info  text-light"> <div class="display-6 ">author:${element.user}</div>
        <div class="display-6">title: ${element.Title}</div>
+       <img  style="width="150" height="150" ; object-fit: cover;" id="imgReader" alt="">
        <div class="display-6">textarea: ${element.Textarea}</div>
        <button class="btn btn-dark m-3" onclick="dell(${index})">Delete</button></div>`;
       }
+    }
+    function logout(){
+      localStorage.removeItem("ccurrent_user")
+      alert("logout successful")
+      window.location.href ="index.html"
     }
   </script>
 </html>

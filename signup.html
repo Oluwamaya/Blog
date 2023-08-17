@@ -27,7 +27,7 @@
 </body>
 <script>
  let username = document.getElementById("for")
- let Email = document.getElementById("man")
+ let email = document.getElementById("man")
  let password = document.getElementById("fir")
  let cpassword = document.getElementById("fur")
  let allUser  = JSON.parse(localStorage.getItem("user")) || [];
@@ -60,11 +60,11 @@
     event.preventDefault()
     let data = {
       username : username.value,
-      Email: Email.value,
+      email: email.value,
       password : password.value,
     }
     // console.log(data)
-    if (username.value == " " || Email.value == "" || password.value == "") {
+    if (username.value == " " || email.value == "" || password.value == "") {
         alert("Input field cannot be empty")
     }
        else if (password.value !== cpassword.value){
@@ -75,7 +75,7 @@
         alert("Signup successful")
      localStorage.setItem("user", JSON.stringify(allUser))
     //  console.log(bro);
-        window.location.href="login.html"
+        window.location.href="index.html"
     }
 
   }

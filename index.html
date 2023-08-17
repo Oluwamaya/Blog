@@ -9,16 +9,17 @@
       rel="stylesheet"
       href="bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css"
  />
+
   </head>
-  <body>
-    <form action="" class="form-group">
+  <body> 
+    <form action="" class="col-sm-6">
       <h3 class="h3 text-light">Login Here 👇</h3>
       <div>
         <label for="man">Email</label><br />
         <input id="man" class="form-control" type="email" />
       </div>
 
-      <div class="form-group">
+      <div class="form-group ">
         <label for="fir">Password</label><br />
         <div class="net">
           <input id="fir" class="form-control" type="password" /><span id="dup" >👁</span>
@@ -26,10 +27,17 @@
         <button class="ken btn btn-primary" onclick="soft(event)" type="submit">
           Login
         </button>
+        <h6>Or</h6>
+        <button id="clan" onclick="clen(event)" class="ken btn btn-primary mb-4">Sign Up</button>
       </div>
     </form>
   </body>
   <script>
+  
+    function clen(ev){
+      ev.preventDefault()
+      window.location.href ="signup.html"
+    }
     let suser = JSON.parse(localStorage.getItem("user"));
     console.log(suser);
     let email = document.getElementById("man");
@@ -45,7 +53,7 @@
 
     function soft(ev) {
       ev.preventDefault();
-       let found = suser.find((guy) => guy.email == Email.value && guy.password == password.value);
+       let found = suser.find((guy) => guy.email == email.value && guy.password == password.value);
       // let found = suser.find((guy) => {
       //   guy.email == email.value || guy.password == password.value
       // });
@@ -60,5 +68,7 @@
         window.location.href = "dashboard.html";
       }
     }
+
+    
   </script>
 </html>
