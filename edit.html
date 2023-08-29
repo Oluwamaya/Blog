@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" onchange="clic(event)">
+    <img id="imgRead" alt="" width="100" height="150" style="object-fit: cover;"  srcset="">
+    <button onclick="done()">Done</button>
+
+</body>
+<script>
+    let imgReader = document.getElementById("imgRead")
+    function clic(ev){
+
+       let file =  ev.target.files[0]
+       let reader = new FileReader
+       reader.addEventListener("load", (e)=>{
+         imgReader.src  =  e.target.result
+         let move = imgReader.src
+         localStorage.setItem("readImg", JSON.stringify(move))
+        })
+        // console.log(move)
+     if (file) {
+        reader.readAsDataURL(file)
+     } else {
+        
+     }
+    }
+    function done(){
+        alert("Profile Picture successfully Updated")
+        window.location.href = "dashboard.html"
+    }
+</script>
+</html>

@@ -36,8 +36,25 @@
       class="container col-sm-7 bg-success border border-2 border-danger text-danger"
     >
       <h6 class="display-4 text-light">
-        welcome <span class="display-5 text-warning" id="userid"></span>
+        <img
+          src="welcome.jpg"
+          width="100"
+          height="50"
+          class="rounded-circle"
+          alt=""
+          srcset=""
+        />
+        <span class="lead text-light" id="userid"></span>
+        <img
+          id="prof"
+          style="object-fit: cover; width: 90px; height: 120px"
+          class="rounded-circle border"
+          alt=""
+        />
       </h6>
+
+      <span class="lead form-control  bg-dark text-light mx-3" style="width: fit-content;">Edit your Profile Pic</span>
+      <button onclick="edit()" class="btn btn-secondary ms-5 mt-2">EDIT</button>
       <div class="new container">
         <div id="bro" class="d-flex justify-content-center mx-3">
           <button class="btn btn-primary ms-3" onclick="postt()">
@@ -62,22 +79,31 @@
     let ccurent_user = JSON.parse(localStorage.getItem("ccurent_user"));
     let welcome = document.getElementById("userid");
     let submittt = document.getElementById("man");
-    let letview = document.getElementById;
+    // let letview = document.getElementById;
     let post = document.getElementById("gen");
     let arr1 = JSON.parse(localStorage.getItem("info")) || [];
     let like = document.getElementById("likeee");
-    // let imgReader = document.getElementById("imgReader")
+    let profile = document.getElementById("prof");
+
+    //TO GET THE DISPLAY PICTURE FROM THE EDIT PAGE
+    let monk = JSON.parse(localStorage.getItem("readImg"));
+    profile.src = monk;
+
+    function edit() {
+      window.location.href = "edit.html";
+    }
 
     let maya = new Date();
-    console.log(maya);
-
-    ("result");
+    doit();
+    function doit(ev) {
+      // ev.target.files
+    }
     welcome.innerHTML = ccurent_user.username.toUpperCase();
 
     function postt() {
       post.innerHTML = `<div class = "mt-4"> <input  id="ken" class="form-control" type="text" placeholder="title">
-        <input type="file" class=" text-right my-2 btn btn-warning bg-black text-light onchange="pickup(event)">
-        <img width="150" height="150" style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); object-fit: cover;" id="imgReader" alt="">
+        <input type="file" class=" text-right my-2 btn btn-warning bg-black text-light" onchange="pickup(event)">
+        <img width="150" height="150" id="imgReader" style="object-fit:contain; border-radius: 100%;" alt="">
         <textarea id="text" placeholder="Description" class="form-control my-3" ></textarea>
        <div class="d-flex"> <button id="man" class="btn btn-info m-3" onclick="sub(event)">Submit</button>
           <button class="btn btn-info m-3" onclick="bell()">DELETE</button></div></div>`;
@@ -85,24 +111,26 @@
       post.style.display = "block";
       viewblog.style.display = "none";
       viewlike.style.display = "none";
-       }
-       let img3;
-    function pickup(ev){
-      let file = ev.target.files[0]
-      console.log(file)
-            let reader = new FileReader();
-            reader.addEventListener("load", (e)=>{
-                console.log(e.target.result);
-                imgReader.src = e.target.result
-      // img3 = ev.target.result
-
-    })
-    if(file){
-      reader.readAsDataURL(file)
     }
-  }
+
+    function pickup(ev) {
+      let javat = document.getElementById("imgReader");
+
+      console.log("oiuyjhtgr");
+      let file = ev.target.files[0];
+      let reader = new FileReader();
+      console.log(reader);
+      reader.addEventListener("load", (e) => {
+        javat.src = e.target.result;
+      });
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
 
     function sub(ev) {
+      let javat = document.getElementById("imgReader");
+
       ev.preventDefault();
       let title = document.getElementById("ken");
       let text = document.getElementById("text");
@@ -111,12 +139,11 @@
         id: Math.floor(Math.random() * 999),
         user: ccurent_user.username,
         Title: title.value,
-         
+        img: javat.src,
         Textarea: text.value,
         isLike: false,
         time: new Date().toLocaleDateString(),
       };
-
       post.style.display = "none";
 
       arr1.push(data);
@@ -131,12 +158,13 @@
       for (let index = 0; index < arr1.length; index++) {
         const element = arr1[index];
 
-        viewblog.innerHTML += `<div  class="container bg-info mt-3 text-light "> <div class="display-6 ">Author: ${
-          element.user
-        }</div>
-              <div class="display-6">Title: ${element.Title}</div>
-              <img  style="width="150" height="150" ; object-fit: cover;" id="imgReader" alt="">
-              <div class="display-7">Text: ${element.Textarea}</div>
+        viewblog.innerHTML += `<div  class="container bg-info mt-3 rounded text-light ">
+        <img src="${
+          element.img
+        }" style="object-fit:cover; width:100px; height:150px;"  class="rounded-circle border"   alt="">
+        <h6 class="lead ">Author: ${element.user}</h6>
+              <b class="lead">Title: ${element.Title}</b>
+              <div class="lead">Text: ${element.Textarea}</div>
               <div>Date: ${element.time}</div>
               <button id="like${element.id}" class="btn ${
           element.isLike ? "btn-dark" : "btn-light"
@@ -178,15 +206,15 @@
         const element = allLiked[index];
         viewlike.innerHTML += `<div class="bg-info  text-light"> <div class="display-6 ">author:${element.user}</div>
        <div class="display-6">title: ${element.Title}</div>
-       <img  style="width="150" height="150" ; object-fit: cover;" id="imgReader" alt="">
+      
        <div class="display-6">textarea: ${element.Textarea}</div>
        <button class="btn btn-dark m-3" onclick="dell(${index})">Delete</button></div>`;
       }
     }
-    function logout(){
-      localStorage.removeItem("ccurrent_user")
-      alert("logout successful")
-      window.location.href ="index.html"
+    function logout() {
+      localStorage.removeItem("ccurrent_user");
+      alert("logout successful");
+      window.location.href = "index.html";
     }
   </script>
 </html>
